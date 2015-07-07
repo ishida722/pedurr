@@ -23,8 +23,8 @@ static void tick_handler(struct tm *tick_time, TimeUnits changed) {
 	if(now - timestamp > 300){
 		vibes_short_pulse();
 		persist_write_int(PERSIST_TIME, now);
+		set_BG_color();
 	}
-	set_BG_color();
 	window_stack_push(my_window, false);
 }
 
