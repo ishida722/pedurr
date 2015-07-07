@@ -33,7 +33,9 @@ void handle_init(void) {
 	window_set_background_color(my_window, GColorRed);
 #endif
 	tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
-	persist_write_int(PERSIST_TIME, time(NULL));
+	if(!persist_exists(PERSIST_TIME)){
+		persist_write_int(PERSIST_TIME, time(NULL));
+	}
 
 	window_stack_push(my_window, true);
 }
