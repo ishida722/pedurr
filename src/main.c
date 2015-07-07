@@ -4,7 +4,7 @@
 #define WAKEUP_ID_KEY 0
 
 Window *my_window;
-static Wakeupid s_wakeup_id;
+static WakeupId s_wakeup_id;
 
 static void tick_handler(struct tm *tick_time, TimeUnits changed) {
 	// 5minute
@@ -14,7 +14,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits changed) {
 	}
 }
 
-static void wakeup_handler(Wakeupid id, int32_t reson)
+static void wakeup_handler(WakeupId id, int32_t reson)
 {
 	vibes_short_pulse();
 	time_t timestamp = time(NULL) + 10;
