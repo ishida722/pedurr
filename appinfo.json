@@ -1,0 +1,23 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "they.know.who.is.the.strongest",
+    "longName": "durr",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "durr",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "07b5c9aa-e11f-4bf7-a5dc-b196ce410914",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
