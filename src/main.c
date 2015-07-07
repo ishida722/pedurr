@@ -12,7 +12,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits changed) {
 	/* int minuts = tick_time->tm_min; */
 	time_t now = time(NULL);
 	time_t timestamp = persist_read_int(PERSIST_TIME);
-	if(now - timestamp > 20){
+	if(now - timestamp > 300){
 		vibes_short_pulse();
 		persist_write_int(PERSIST_TIME, now);
 	}
