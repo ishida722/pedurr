@@ -2,15 +2,21 @@
 
 #define WAKEUP_RESON 0
 #define WAKEUP_ID_KEY 0
+#define PERSIST_TIME 1
 
 Window *my_window;
 static WakeupId s_wakeup_id;
 
 static void tick_handler(struct tm *tick_time, TimeUnits changed) {
 	// 5minute
-	int minuts = tick_time->tm_min;
-	if(minuts%5 == 0){
+	/* int minuts = tick_time->tm_min; */
+	time_t now = time(NULL);
+	time_t timestamp = persist_read_int(PERSIST_TIME);
+	if(now - timestamp > 20){
 		vibes_short_pulse();
+		persist_write_int(PERSIST_TIME, now);
+	}
+	if(minuts%5 == 0){
 	}
 }
 
@@ -28,13 +34,9 @@ void handle_init(void) {
 #ifdef PBL_SDK_3
 	window_set_background_color(my_window, GColorRed);
 #endif
-	/* tick_timer_service_subscribe(MINUTE_UNIT, tick_handler); */
+	tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+	persist_write_int(PERSIST_TIME, time(now));
 
-	time_t timestamp = time(NULL) + 10;
-	s_wakeup_id = wakeup_schedule(timestamp, WAKEUP_RESON, true);
-	persist_write_int(WAKEUP_ID_KEY, s_wakeup_id);
-
-	wakeup_service_subscribe(wakeup_handler);
 
 	window_stack_push(my_window, true);
 }
