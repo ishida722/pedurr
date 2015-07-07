@@ -16,8 +16,6 @@ static void tick_handler(struct tm *tick_time, TimeUnits changed) {
 		vibes_short_pulse();
 		persist_write_int(PERSIST_TIME, now);
 	}
-	if(minuts%5 == 0){
-	}
 }
 
 static void wakeup_handler(WakeupId id, int32_t reson)
@@ -35,8 +33,7 @@ void handle_init(void) {
 	window_set_background_color(my_window, GColorRed);
 #endif
 	tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
-	persist_write_int(PERSIST_TIME, time(now));
-
+	persist_write_int(PERSIST_TIME, time(NULL));
 
 	window_stack_push(my_window, true);
 }
