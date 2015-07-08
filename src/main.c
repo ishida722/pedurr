@@ -8,12 +8,14 @@
 
 Window *my_window;
 
+#ifdef PBL_SDK_3
 static void set_BG_color(void)
 {
 	srand(time(NULL));
 	int color = 255 - rand();
 	window_set_background_color(my_window, (GColor8){.argb = color});
 }
+#endif
 
 static void tick_handler(struct tm *tick_time, TimeUnits changed) {
 	// 5minute
@@ -23,7 +25,9 @@ static void tick_handler(struct tm *tick_time, TimeUnits changed) {
 	if(now - timestamp > 300){
 		vibes_short_pulse();
 		persist_write_int(PERSIST_TIME, now);
+#ifdef PBL_SDK_3
 		set_BG_color();
+#endif
 	}
 	/* window_stack_push(my_window, false); */
 }
