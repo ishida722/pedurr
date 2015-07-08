@@ -6,7 +6,6 @@
 #define RAND_MAX 63
 
 Window *my_window;
-static WakeupId s_wakeup_id;
 
 static void set_BG_color(void)
 {
@@ -25,15 +24,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits changed) {
 		persist_write_int(PERSIST_TIME, now);
 		set_BG_color();
 	}
-	window_stack_push(my_window, false);
-}
-
-static void wakeup_handler(WakeupId id, int32_t reson)
-{
-	vibes_short_pulse();
-	time_t timestamp = time(NULL) + 10;
-	s_wakeup_id = wakeup_schedule(timestamp, WAKEUP_RESON, true);
-	persist_write_int(WAKEUP_ID_KEY, s_wakeup_id);
+	/* window_stack_push(my_window, false); */
 }
 
 void handle_init(void) {
@@ -50,7 +41,6 @@ void handle_init(void) {
 
 	window_stack_push(my_window, true);
 }
-
 
 void handle_deinit(void) {
 	window_destroy(my_window);
