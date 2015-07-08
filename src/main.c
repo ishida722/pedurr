@@ -3,6 +3,7 @@
 #define WAKEUP_RESON 0
 #define WAKEUP_ID_KEY 0
 #define PERSIST_TIME 1
+#undef RAND_MAX
 #define RAND_MAX 63
 
 Window *my_window;
